@@ -1,6 +1,7 @@
 from django.db import models
 
 class Card(models.Model):
-    id_carta = models.IntegerField()
+    id = models.AutoField(primary_key=True)
+    id_carta = models.CharField(max_length=24,unique=True)
     stock = models.IntegerField()
-    price = models.DecimalField(max_digits = 6,decimal_places = 2)
+    price = models.IntegerField()
