@@ -37,4 +37,10 @@ class CardView(APIView):
         
         except Card.DoesNotExist:
             return Response({'error':'No hay cartas'}, status=404)
+        
+class Cards(APIView):
+    def get(self,request):
+        card = Card.objects.all()
+        serializer = CardSerializer(card,many=True)
+        return Response(serializer.data)
                 
