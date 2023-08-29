@@ -7,36 +7,40 @@ from .serializers import CardSerializer
 import requests
 
 class CardView(APIView):
-    def get(self,request):
+    def get(self, request):
         try:
-            all_cards = Card.objects.all()
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/heroes/?page_size=6&page_number=1')
+            data = response.json()
+
             card_data = []
-            
-            def get_card_data(card_item):
-                id_carta = card_item.id_carta
-                price = card_item.price
-                stock = card_item.stock
-                
-                response = requests.get('') #endpoint del inventario
-                data = response.json()
-                
-                card_item_data = {
-                    'id_carta': id_carta,
-                    'name': data['name'],
-                    'description':data['description'],
-                    'price':price,
-                    'stock': stock
-                }
-                
-                return card_item_data
-            
-            with ThreadPoolExecutor() as executor:
-                card_data = list(executor.map(get_card_data, all_cards))
-                
+
+            for carta_data in data:
+                id_carta = carta_data.get('Id', '')
+                hero_name = carta_data.get('Clase', '')
+                desc = carta_data.get('Tipo', '')
+
+                try:
+                    card_db = Card.objects.get(id_carta=id_carta)
+                    price = card_db.price
+                    stock = card_db.stock
+
+                    card_item_data = {
+                        'id_carta': id_carta,
+                        'name': hero_name,
+                        'description': desc,
+                        'price': price,
+                        'stock': stock
+                    }
+
+                    card_data.append(card_item_data)
+                except Card.DoesNotExist:
+                    pass  # No se encontró la carta en la base de datos
+
             return Response(card_data)
-        
-        except Card.DoesNotExist:
-            return Response({'error':'No hay cartas'}, status=404)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+
         
 class Cards(APIView):
     def get(self,request):
