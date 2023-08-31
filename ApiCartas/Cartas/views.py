@@ -12,7 +12,7 @@ class CardView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -53,6 +53,29 @@ class CardView(APIView):
 
         except Exception as e:
             return Response({'error': 'Error al obtener datos'}, status=500)
+
+#ver el detalle de cada carta
+class CardDetail(APIView):
+    def get(self, request, id_carta):
+        try:
+            response = requests.get(f'https://main-api-cartas.thenexusbattles2.com/api/all/{id_carta}')
+            data = response.json()
+            
+            card_db = Card.objects.get(id_carta=id_carta)
+            
+            card_data = {
+                'id_carta':id_carta,
+                'price':card_db.price,
+                'stock':card_db.stock,
+                'nombre_carta': card_db.nombre_carta,
+                **data #desempaquetar rapidamente todos los elementos del diccionario
+            }
+            
+            return Response(card_data)
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+        
+            
 
 #endpoint de personajes
 class CardCharacterView(APIView):
