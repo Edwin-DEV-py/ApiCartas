@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g@5!xak$ie!8leb^pi_-(l&y7w=!fi!*jfb4-$8o6pte&pk#fi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api-cartas-gama.thenexusbattles2.com']
 
 
 # Application definition
