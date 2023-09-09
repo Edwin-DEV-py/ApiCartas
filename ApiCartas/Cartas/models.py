@@ -13,4 +13,5 @@ class Cardgames(models.Model):
     title = models.CharField(max_length=20)
     games = models.IntegerField()
     sub = models.BooleanField(default=False)
+    img = models.CharField(max_length=300)
     price = models.IntegerField()
