@@ -30,6 +30,7 @@ class CardView(APIView):
             #aca mapeamos los datos para unirlos con la inforacion de la DB de precios y stock
             for carta_data in page_data:
                 id_carta = carta_data.get('_id', '')
+                
 
                 card_item_data = {
                     'id_carta': id_carta,
@@ -94,7 +95,7 @@ class CardCharacterView(APIView):
                 id_carta = carta_data.get('Id', '')
 
                 card_item_data = {
-                    'Id': id_carta,
+                    'id_carta': id_carta,
                 }
 
                 # Iterar a través de todas las propiedades del objeto
@@ -142,7 +143,7 @@ class CardGunView(APIView):
                 id_carta = carta_data.get('Id', '')
 
                 card_item_data = {
-                    'Id': id_carta,
+                    'id_carta': id_carta,
                 }
 
                 # Iterar a través de todas las propiedades del objeto
@@ -181,7 +182,7 @@ class CardArmorView(APIView):
                 id_carta = carta_data.get('Id', '')
 
                 card_item_data = {
-                    'Id': id_carta,
+                    'id_carta': id_carta,
                 }
 
                 # Iterar a través de todas las propiedades del objeto
@@ -220,7 +221,7 @@ class CardItemsView(APIView):
                 id_carta = carta_data.get('Id', '')
 
                 card_item_data = {
-                    'Id': id_carta,
+                    'id_carta': id_carta,
                 }
 
                 # Iterar a través de todas las propiedades del objeto
