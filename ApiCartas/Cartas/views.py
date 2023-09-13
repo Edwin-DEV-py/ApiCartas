@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .models import Card
+from .models import Card, Cardgames
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from concurrent.futures import ThreadPoolExecutor
-from .serializers import CardSerializer
+from .serializers import CardSerializer, CardgamesSerializer
+from rest_framework import status
 import requests
 
 #endpoint de todas las cartas
@@ -250,7 +251,13 @@ class CardItemsView(APIView):
 
         except Exception as e:
             return Response({'error': 'Error al obtener datos'}, status=500)
-
+        
+#endpoint de membresias
+class Membership(APIView):
+    def get(self,request):
+        cards = Cardgames.objects.all()
+        serializer = CardgamesSerializer(cards,many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 
