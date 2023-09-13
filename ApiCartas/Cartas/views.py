@@ -93,7 +93,7 @@ class CardCharacterView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/heroes/?page_size=6&page_number=1')
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/heroes/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []
@@ -132,7 +132,7 @@ class CardGunView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/armas/?page_size=12&page_number=1')
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/armas/?page_size=12&page_number=1')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -180,7 +180,7 @@ class CardArmorView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/armaduras/?page_size=6&page_number=1')
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/armaduras/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []
@@ -219,7 +219,7 @@ class CardItemsView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/items/?page_size=6&page_number=1')
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/items/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []
