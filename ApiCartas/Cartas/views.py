@@ -7,6 +7,13 @@ from .serializers import CardSerializer
 import requests
 
 #endpoint de todas las cartas
+class example(APIView):
+    def get(self,request):
+        cards = Card.objects.all()
+        serializer = CardSerializer(cards,many=True)
+        return Response(serializer.data)
+    
+    
 class CardView(APIView):
     def get(self, request):
         try:
