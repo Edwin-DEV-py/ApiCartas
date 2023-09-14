@@ -68,20 +68,31 @@ class CardView(APIView):
 class CardDetail(APIView):
     def get(self, request, id_carta):
         try:
-            response = requests.get(f'https://main-api-cartas.thenexusbattles2.com/api/all/{id_carta}')
+            
+            #obtener los datos del inventario
+            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
             data = response.json()
+
+            card_data = []
             
-            card_db = Card.objects.get(id_carta=id_carta)
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('_id') == id_carta:
+                    card_data = carta
+                    break
             
-            card_data = {
-                'id_carta':id_carta,
-                'price':card_db.price,
-                'stock':card_db.stock,
-                'nombre_carta': card_db.nombre_carta,
-                **data #desempaquetar rapidamente todos los elementos del diccionario
-            }
+            #ahora incorporamos los datos de la DB local
+            try:
+                card_db = Card.objects.get(id_carta=id_carta)
+                card_data['price'] = card_db.price
+                card_data['stock'] = card_db.stock
+                card_data['nombre_carta'] = card_db.nombre_carta
+            except Card.DoesNotExist:
+                pass  # No se encontró la carta
             
             return Response(card_data)
+
         except Exception as e:
             return Response({'error': 'Error al obtener datos'}, status=500)
         
