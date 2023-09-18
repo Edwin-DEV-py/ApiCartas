@@ -25,8 +25,8 @@ class CardView(APIView):
             heroe = request.data.get('heroe')
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
-            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -94,13 +94,326 @@ class CardView(APIView):
         except Exception as e:
             return Response({'error': 'Error al obtener datos'}, status=500)
 
+#tipo de carta Tanque
+class CardTipeTankView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Guerrero Tanque'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+
+#tipo de carta Armas
+class CardTipeGunView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Guerrero Armas'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+        
+#tipo de carta Fuego
+class CardTipeFireView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Mago Fuego'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+        
+#tipo de carta Hielo
+class CardTipeIceView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Mago Hielo'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+
+#tipo de carta Veneno
+class CardTipeVenenoView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Picaro Veneno'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+        
+#tipo de carta Machete
+class CardTipeMacheteView(APIView):
+    def get(self, request):
+        try:
+            
+            #indexacion y busqueda
+            heroe = 'Picaro Machete'
+            
+            #obtener los datos del inventario
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            data = response.json()
+
+            #aplicamos paginacion para solo traer 6 cartas para la vitrina
+            page_number = int(request.GET.get('page_number', 1))
+            cards_per_page = 6
+            total_cards = len(data)
+            start_index = (page_number - 1) * cards_per_page
+            end_index = start_index + cards_per_page
+
+            page_data = data[start_index:end_index] #aqui mostramos las cartas
+
+            card_data = []
+            
+            
+            #iterar por el json
+            for carta in data:
+                #comparar el id del json con el id que pasamos
+                if carta.get('heroe', '').lower() == heroe.lower():
+                    carta_data = {
+                        'id_carta':carta.get('_id',''),
+                    }
+                    # Iterar a través de todas las propiedades del objeto
+                    for key, value in carta.items():
+                        if key != '_id':
+                            carta_data[key] = value
+                    #ahora incorporamos los datos de la DB local
+                    try:
+                        card_db = Card.objects.get(id_carta=carta_data['id_carta'])
+                        carta_data['price'] = card_db.price
+                        carta_data['stock'] = card_db.stock
+                        carta_data['nombre_carta'] = card_db.nombre_carta
+                    except Card.DoesNotExist:
+                        pass  # No se encontró la carta
+                    
+                    card_data.append(carta_data)
+
+            return Response(card_data)
+
+        except Exception as e:
+            return Response({'error': 'Error al obtener datos'}, status=500)
+
 #ver el detalle de cada carta
 class CardDetail(APIView):
     def get(self, request, id_carta):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/all/')
+            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             card_data = []
@@ -134,7 +447,7 @@ class CardCharacterView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/heroes/?page_size=6&page_number=1')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/heroes/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []
@@ -173,7 +486,7 @@ class CardGunView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/armas/?page_size=12&page_number=1')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/armas/?page_size=12&page_number=1')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -221,7 +534,7 @@ class CardArmorView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/armaduras/?page_size=6&page_number=1')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/armaduras/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []
@@ -260,7 +573,7 @@ class CardItemsView(APIView):
         try:
             
             #obtener los datos del inventario
-            response = requests.get('https://main-api-cartas.thenexusbattles2.com/api/items/?page_size=6&page_number=1')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/items/?page_size=6&page_number=1')
             data = response.json()
 
             card_data = []

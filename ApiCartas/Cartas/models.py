@@ -7,6 +7,7 @@ class Card(models.Model):
     stock = models.IntegerField()
     price = models.IntegerField()
     is_available = models.BooleanField(default=True)
+    discount = models.BooleanField(default=False)
     
 class Cardgames(models.Model):
     id_carta = models.AutoField(primary_key=True)
