@@ -308,7 +308,7 @@ class CardTipeVenenoView(APIView):
         try:
             
             #indexacion y busqueda
-            heroe = 'Picaro Veneno'
+            heroe = 'Pícaro Veneno'
             
             #obtener los datos del inventario
             #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
@@ -360,7 +360,7 @@ class CardTipeMacheteView(APIView):
         try:
             
             #indexacion y busqueda
-            heroe = 'Picaro Machete'
+            heroe = 'Pícaro Machete'
             
             #obtener los datos del inventario
             #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
