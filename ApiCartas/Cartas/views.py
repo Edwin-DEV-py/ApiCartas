@@ -25,8 +25,8 @@ class CardView(APIView):
             heroe = request.data.get('heroe')
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
