@@ -93,6 +93,16 @@ class CardView(APIView):
 
         except Exception as e:
             return Response({'error': 'Error al obtener datos'}, status=500)
+    
+    def post(self,request):
+        id_carta = request.data.get('id_carta')
+        try:
+            Card.objects.get(id_carta=id_carta)
+            return Response({'Error:':'Esta carta ya existe'})
+        except Card.DoesNotExist:
+            card = Card.objects.create(id_carta=id_carta)
+            serializer = CardSerializer(card)
+            return Response(serializer.data)
 
 #tipo de carta Tanque
 class CardTipeTankView(APIView):
