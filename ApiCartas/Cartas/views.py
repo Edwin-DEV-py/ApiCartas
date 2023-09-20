@@ -103,8 +103,8 @@ class CardTipeTankView(APIView):
             heroe = 'Guerrero Tanque'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -122,7 +122,7 @@ class CardTipeTankView(APIView):
             #iterar por el json
             for carta in data:
                 #comparar el id del json con el id que pasamos
-                if carta.get('heroe', '').lower() == heroe.lower():
+                if carta.get('heroe') == heroe:
                     carta_data = {
                         'id_carta':carta.get('_id',''),
                     }
@@ -155,8 +155,8 @@ class CardTipeGunView(APIView):
             heroe = 'Guerrero Armas'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -207,8 +207,8 @@ class CardTipeFireView(APIView):
             heroe = 'Mago Fuego'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -259,8 +259,8 @@ class CardTipeIceView(APIView):
             heroe = 'Mago Hielo'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -311,8 +311,8 @@ class CardTipeVenenoView(APIView):
             heroe = 'Pícaro Veneno'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
@@ -363,8 +363,8 @@ class CardTipeMacheteView(APIView):
             heroe = 'Pícaro Machete'
             
             #obtener los datos del inventario
-            #response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
-            response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
+            response = requests.get('https://cards.thenexusbattles2.cloud/api/all/')
+            #response = requests.get('http://prime.bucaramanga.upb.edu.co/api/all/')
             data = response.json()
 
             #aplicamos paginacion para solo traer 6 cartas para la vitrina
